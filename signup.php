@@ -68,7 +68,7 @@ _END;
   	 	if ($result->num_rows)
   	 	 $error = "That username already exists<br><br>";
   	 	 else {
-  	 	 	queryMysql("INSERT INTO members VALUES('$user', '$pass;)");
+  	 	 	queryMysql("INSERT INTO members VALUES('$user', '$pass')");
   	 	 	die("<h4>Account created</h4>Please Log in.<br><br>");
   	   }
   	 } 
