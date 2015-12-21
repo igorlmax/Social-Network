@@ -48,6 +48,10 @@ echo <<<_END
 	  <div class='main'><h3>Please enter your details to sign up</h3>
 _END;
 
+/*
+ * remove potentially malicious characters before looking up the 
+ * username in the database
+ */
   $error = $user = $pass = "";
   
   if (isset($_SESSION['user'])) destroySession();
