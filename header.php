@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<script type="text/javascript" src="js/javascript.js"></script>
 <?php
 session_start();
 
