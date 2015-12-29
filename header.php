@@ -1,16 +1,20 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <script type="text/javascript" src="js/javascript.js"></script>
+
 <?php
+// Start the Session or continue it
 session_start();
 
 echo "<!DOCTYPE html>\n<html><head>";
 
+// Include the App functions
 require_once 'functions.php';
 
+// $userstr in the beginning is set to Guest
 $userstr = ' (Guest)';
 
 /*
- * First If-Else Block
+ * Checks whether the User is loggedin
  */
 if(isset($_SESSION['user'])){
 	$user = $_SESSION['user'];
@@ -28,7 +32,7 @@ else
 	"<script src='javascript.js'></script>";
 	
 /*
- * Second If-Else Block
+ * Load a style sheet, depend on whther the user is loggedin or not
  */
 if($loggedin)
 	echo "<br ><ul class='menu'>" .
