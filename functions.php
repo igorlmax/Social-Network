@@ -16,18 +16,16 @@ $dbpass = 'passadmin';
 $appname = 'Social Network';
 
 /*
-$connection = new mysqli($dbhost, $dbname, $dbpass, $dbuser);
-if ($connection->connect_error) die($connection->connect_error);
-*/
-
-/*
- * Create App Functions()
+ * Create App Functions
  */   
+
+// Create table
 function createTable($name, $query){
 	queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
 	echo "Table '$name' created or alreadt exists.<br>";
 }
 
+// Issue a Query to MySQL
 function queryMysql($query){
 	global $connection;
 	$result = $connection->query($query);
@@ -35,6 +33,7 @@ function queryMysql($query){
 	return $result;
 }
 
+// Destroy the Session and log users out
 function destroySession(){
 	$_SESSION = array();
 	
@@ -44,15 +43,18 @@ function destroySession(){
 	 session_destroy();
 }
 
+// Removes malicious code
 function sanitizeString($var){
 	global $connection;
 	
 	$var = strip_tags($var);
 	$var = htmlentities($var);
-	$var - stripslashes($var);
+	$var = stripslashes($var);
+	
 	return $connection->real_escape_string($var);
 }
 
+// Show the User profile image and about me
 function showProfile($user){
 	if (file_exists("$user.jpg"))
 	echo "<img src='$user.jpg' style='float:left;'>";
