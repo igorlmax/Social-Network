@@ -5,7 +5,7 @@ require_once 'header.php';
  * Ajax Call checks User's existence
  */
 echo <<<_END
-  <script>
+ <script>
 	function checkUser(user)
 	{
 	 if (user.value == '')
@@ -49,7 +49,7 @@ echo <<<_END
 _END;
 
 /*
- * remove potentially malicious characters before looking up the 
+ * Remove potentially malicious characters before looking up the 
  * username in the database
  */
   $error = $user = $pass = "";
@@ -73,20 +73,28 @@ _END;
   	   }
   	 } 
   }
-
+/*
+ * Sign Up Form
+ */
 echo <<<_END
-  <form method='post' action='signup.php'>$error
+<form method='post' action='signup.php'>$error
+  
   <span class='fieldname'>Username</span>
-  <input type='text' maxlength='16' name='user' value='$user'
-    onBlur='checkUser(this)'><span id='info'></span><br>
+  <input type='text' maxlength='16' name='user' value='$user' onBlur='checkUser(this)'><span id='info'></span>
+  
+  <br>
+  
   <span class='fieldname'>Password</span>
-  <input type='text' maxlength='16' name='pass'  
-    value='$pass'><br>
+  <input type='text' maxlength='16' name='pass' value='$pass'>
+  
+  <br>
 _END;
 ?>
-
-			<span class='fieldname'>&nbsp;</span>
-			<input type='submit' value='Sign up'>
-		</form></div><br>
+	<span class='fieldname'>&nbsp;</span>
+	<input type='submit' value='Sign up'>
+			
+				</form>
+			</div>
+		<br>
   </body>
 </html>

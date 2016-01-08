@@ -6,24 +6,25 @@
 //Get the Header
 require_once 'header.php';
 
-// Check if the user is logged in
+// Check whether the user is logged in
 if(!$loggedin) die();
 
 // If user is logged in, display the profile
 echo "<div class='main'><h3>Your Profile</h3>";
 
-// Check to see whether some text was posted
 $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
 
 // IF there is already text, UPDATE it, otherwise INSERT the new one
 if (isset($_POST['text'])){
 	$text = sanitizeString($_POST['text']);
 	$text = preg_replace('/\s\s+/', ' ', $text);
-
+		
+// If it exist in some row
 	if ($result->num_rows)
-	 queryMysql("UPDATE profiles SET text='$text' where user='$user'");
-	else queryMysql("INSERT INTO profiles VALUES('$user', '$text')");
-}
+		queryMysql ( "UPDATE profiles SET text='$text' where user='$user'" );
+	else
+		queryMysql ( "INSERT INTO profiles VALUES('$user', '$text')" );
+} 
 
 else {
 	if ($result->num_rows) {
@@ -73,14 +74,15 @@ if(isset($_FILES['image']['name'])){
 		}
 
 		$tmp = imagecreatetruecolor($tw, $th);
+
 // Resample the image from $src, to the new $tmp
 		imagecopyresampled($tmp, $src, 0, 0, 0, 0, $tw, $th, $w, $h);
-		
+
 // Sharpen the image
 		imageconvolution($tmp, array(array(-1, -1, -1),
 		array(-1, 16, -1), array(-1, -1, -1)), 8, 0);
 		imagejpeg($tmp, $saveto);
-		
+
 //remove both the original and the resized image canvases from memory using
 		imagedestroy($tmp);
 		imagedestroy($src);
@@ -95,14 +97,14 @@ showProfile($user);
  */
 echo <<<_END
   <form method='post' action='profile.php' enctype='multipart/form-data'>
-  <h3>Enter or edit your details and/or upload an image</h3>
-  <textarea name='text' cols='50' rows='3'>$text</textarea><br>
+  	<h3>Enter or edit your details and/or upload an image</h3>
+	  <textarea name='text' cols='50' rows='3'>$text</textarea><br>
 _END;
 ?>
 
 <!-- input type of file -->
 		Image: <input type="file" name='image' size='14'>
-		
+
 <!-- After submitting the code above is executed -->
 		<input type="submit" value='Save Profile'>
 		</form></div><br>

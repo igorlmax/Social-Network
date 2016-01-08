@@ -1,7 +1,9 @@
 <?php
 require_once 'header.php';
+
 if (! $loggedin)
 	die ();
+
 echo "<div class='main'>";
 if (isset ( $_GET ['view'] )) {
 	$view = sanitizeString ( $_GET ['view'] );
