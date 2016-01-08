@@ -16,7 +16,7 @@ if ($view == $user) {
 }
 echo "<div class='main'>";
 // Uncomment this line if you wish the user's profile to show here
-// showProfile($view);
+showProfile($view);
 $followers = array ();
 $following = array ();
 $result = queryMysql ( "SELECT * FROM friends WHERE user='$view'" );
